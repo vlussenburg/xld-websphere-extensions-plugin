@@ -1,0 +1,72 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0"
+  }
+}
+
+import org.apache.tools.ant.filters.ReplaceTokens
+plugins {
+    id "com.github.hierynomus.license" version "0.12.1"
+    id "com.xebialabs.xldp" version "1.0.5"
+    id "com.xebialabs.xl.docker" version "1.0.0"
+}
+
+repositories {
+  mavenLocal()
+    mavenCentral()
+    maven {
+      url 'https://dist.xebialabs.com/public/maven2'
+    }
+    flatDir {
+       dirs 'libs'
+   }
+}
+
+version='4.5.1'
+def apiVersion = '2015.2.7'
+
+apply plugin: "com.github.hierynomus.license"
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+
+
+
+
+license {
+  header rootProject.file('src/main/license/xebialabs_community.license')
+    strictCheck true
+}
+
+dependencies {
+  compile "com.xebialabs.deployit:udm-plugin-api:$apiVersion"
+    compile "com.xebialabs.deployit:engine-spi:$apiVersion"
+    compile "com.xebialabs.deployit:engine-api:$apiVersion"
+    compile "com.xebialabs.deployit:appserver-api:$apiVersion"
+    compile "com.xebialabs.deployit.plugins:python-plugin:7.2.0"
+    compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.09'
+    compile 'com.google.guava:guava:18.0'
+    compile "junit:junit:4.11"
+    compile name: 'was-plugin-7.0.0'
+}
+
+xlDocker {
+    compileImage = 'xebialabs/xld_dev_compile'
+    compileVersion = 'v7.1.0.1'
+    runImage = 'xebialabs/xld_dev_run'
+    runVersion = 'v7.1.0.1'
+    runPortMapping = '8516:4516'
+}
+
+version="1.0.0"
+
+processResources.configure {
+    filter ReplaceTokens, tokens: [
+            'project.version': version.toString(),
+            'project.name': rootProject.name
+    ]
+}
