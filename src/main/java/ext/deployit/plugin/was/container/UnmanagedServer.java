@@ -29,4 +29,10 @@ public class UnmanagedServer extends com.xebialabs.deployit.plugin.was.container
         return serverName;
     }
 
+    @Override
+    @DerivedProperty("name")
+    public String getName() {
+        return serverName;
+    }
+
 }
