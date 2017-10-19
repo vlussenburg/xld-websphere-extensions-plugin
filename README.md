@@ -1,4 +1,4 @@
-# xld-terraform-plugin
+# xld-websphere-extensions-plugin
 
 # Disclaimer
 
