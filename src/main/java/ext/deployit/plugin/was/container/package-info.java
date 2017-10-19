@@ -4,6 +4,6 @@
  * FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
  */
 @Prefix("was-ext")
-package ext.com.xebialabs.deployit.plugin.was.container;
+package ext.deployit.plugin.was.container;
 
 import com.xebialabs.deployit.plugin.api.udm.Prefix;
